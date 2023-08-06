@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import path from 'path'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 //components
 import Connection from './database/db.js';
@@ -17,6 +18,9 @@ app.use(cors());
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', Router);
+
+const __filename = fileURLToPath(import.meta.url); // Get the current file's path
+const __dirname = path.dirname(__filename); // Get the directory name from the file path
 
 app.use(express.static(path.join(__dirname,"./client/build")));
 
